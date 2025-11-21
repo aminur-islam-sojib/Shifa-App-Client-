@@ -16,6 +16,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ThemeToggle } from "@/Features/ThemeToggle/ThemeToggle";
 
 export default function Navbar() {
   // Later replace with Firebase auth state
@@ -26,7 +27,7 @@ export default function Navbar() {
   const activeClass = "text-primary font-semibold";
 
   return (
-    <nav className="w-full border-b bg-white sticky top-0 z-50">
+    <nav className="w-full border-b   sticky top-0 z-50 px-5">
       <div className="container mx-auto flex items-center justify-between py-4 px-2">
         {/* Logo */}
         <h1 className="text-2xl font-bold">Shifa</h1>
@@ -34,7 +35,7 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
           <NavigationMenu>
-            <NavigationMenuList>
+            <NavigationMenuList className=" flex gap-5">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <NavLink
@@ -44,19 +45,6 @@ export default function Navbar() {
                     }
                   >
                     Home
-                  </NavLink>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <NavLink
-                    to="/toys"
-                    className={({ isActive }) =>
-                      isActive ? activeClass : navItemClass
-                    }
-                  >
-                    Toys
                   </NavLink>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -126,6 +114,7 @@ export default function Navbar() {
               <NavLink to="/register">
                 <Button>Register</Button>
               </NavLink>
+              <ThemeToggle />
             </div>
           )}
         </div>
@@ -144,16 +133,12 @@ export default function Navbar() {
                 <NavLink to="/" className="text-lg">
                   Home
                 </NavLink>
-                <NavLink to="/toys" className="text-lg">
-                  Toys
-                </NavLink>
                 <NavLink to="/about" className="text-lg">
                   About
                 </NavLink>
                 <NavLink to="/contact" className="text-lg">
                   Contact
                 </NavLink>
-
                 <hr className="my-4" />
 
                 {/* Mobile auth */}
@@ -180,6 +165,9 @@ export default function Navbar() {
                     <NavLink to="/register" className="text-lg">
                       Register
                     </NavLink>
+                    <div className="  ">
+                      <ThemeToggle />
+                    </div>
                   </>
                 )}
               </div>
