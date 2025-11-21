@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { Menu, LogOut, User, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,8 +20,8 @@ import { ThemeToggle } from "@/Features/ThemeToggle/ThemeToggle";
 
 export default function Navbar() {
   // Later replace with Firebase auth state
+  const navigate = useNavigate();
   const isLoggedIn = false;
-
   const navItemClass = "px-4 py-2 hover:text-primary transition font-medium";
 
   const activeClass = "text-primary font-semibold";
@@ -109,10 +109,12 @@ export default function Navbar() {
           ) : (
             <div className="flex items-center gap-3">
               <NavLink to="/login">
-                <Button variant="outline">Login</Button>
+                <Button variant="outline" onClick={() => navigate("/login")}>
+                  Login
+                </Button>
               </NavLink>
               <NavLink to="/register">
-                <Button>Register</Button>
+                <Button onClick={() => navigate("/register")}>Register</Button>
               </NavLink>
               <ThemeToggle />
             </div>
