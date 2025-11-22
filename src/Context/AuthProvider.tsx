@@ -9,6 +9,7 @@ import {
   signInWithPopup,
   signOut,
   type User as FirebaseUser,
+  type UserCredential,
 } from "firebase/auth";
 import { auth } from "./firebase.init";
 
@@ -19,9 +20,9 @@ interface AuthProviderProps {
 interface AuthContextType {
   user: FirebaseUser | null;
   loading: boolean;
-  googleLogin: () => Promise<void>;
-  createUser: (email: string, password: string) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>;
+  googleLogin: () => Promise<UserCredential>;
+  createUser: (email: string, password: string) => Promise<UserCredential>;
+  login: (email: string, password: string) => Promise<UserCredential>;
   logOut: () => Promise<void>;
 }
 
@@ -34,26 +35,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   // Create User
   const createUser = async (email: string, password: string) => {
     setLoading(true);
-    await createUserWithEmailAndPassword(auth, email, password);
+    return await createUserWithEmailAndPassword(auth, email, password);
   };
 
   // Login
   const login = async (email: string, password: string) => {
     setLoading(true);
-    await signInWithEmailAndPassword(auth, email, password);
+    return await signInWithEmailAndPassword(auth, email, password);
   };
 
   // Log Out
   const logOut = async () => {
     setLoading(true);
-    await signOut(auth);
+    return await signOut(auth);
   };
 
   // Google Login
   const googleLogin = async () => {
     setLoading(true);
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    return await signInWithPopup(auth, provider);
   };
 
   useEffect(() => {
